@@ -1,0 +1,431 @@
+/*----------------------- CSS Reset --------------------------*/
+
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  /*
+    2. Remove default margin
+  */
+  * {
+    margin: 0;
+  }
+  /*
+    3. Allow percentage-based heights in the application
+  */
+  html, body {
+    height: 100%;
+  }
+  /*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+  body {
+    line-height: 1.5;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  /*
+    6. Improve media defaults
+  */
+  img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+  }
+  /*
+    7. Remove built-in form typography styles
+  */
+  input, button, textarea, select {
+    font: inherit;
+  }
+  /*
+    8. Avoid text overflows
+  */
+  p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+  }
+  /*
+    9. Create a root stacking context
+  */
+  #root, #__next {
+    isolation: isolate;
+  }
+
+  
+body {
+  --sb-track-color: rgba(9, 9, 9, 0);
+  --sb-thumb-color: #9f9f9f;
+  --sb-size: 8px;
+
+  scrollbar-color: var(--sb-thumb-color) 
+                   var(--sb-track-color);
+}
+
+  /* -----------------------------------------------------------------------------------*/
+
+  /*------------------------- Custom variables --------------------------- */
+  :root {
+    --bg-dark-gray: rgb(233, 236, 239);
+    --bg-gray: rgb(248, 249, 250);
+    --white: rgb(255, 255, 255);
+    --light-blue: rgb(231, 245, 255);
+    --black: rgb(0, 0, 0);
+    --blue: rgb(51, 154, 240);
+    --faded-black: rgb(73, 80, 87);
+    --dark-gray: rgb(134, 142, 150);
+  }
+
+  /*--------------------- Top level Css --------------------------*/
+
+  .app {
+    --navbar-height: 9.5vh;
+    height: 100vh;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-container {
+    height: calc(100% - var(--navbar-height));
+    flex-grow: 1;
+
+    display: flex;
+  }
+
+  /* ----------------------Sidebar-----------------------*/
+  .sidebar {
+    background: var(--bg-gray);
+    width: 22rem;
+    flex-shrink: 0;
+    padding: 1.5rem 0;
+    height: 100%;
+    overflow-y: hidden;
+    transition: all 350ms ease-out;
+  }
+
+  .sidebar:hover {
+    overflow-y: auto;
+  }
+
+  .sidebar::-webkit-scrollbar {
+    width: var(--sb-size) 
+  }
+  
+  .sidebar::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
+
+  .sidebar-topic-container {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .topic-button {
+    border: none;
+    padding: .8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: none;
+  }
+
+  .topic-button:hover, .topic-button.selected {
+    background: var(--light-blue);
+  }
+
+  .topic-button-icon-container {
+    padding: .35rem;
+    background: var(--light-blue);
+    border-radius: .2rem;
+  }
+
+  .topic-title {
+    margin-left: 1.2rem;
+    margin-right: auto;
+  }
+
+  .topic-exercise-container {
+    padding-left: 2rem;
+  }
+
+  .exercise-button {
+    width: 100%;
+    border: none;
+    text-align: left;
+    padding: .8rem;
+    border-left: 2px solid var(--blue);
+    color: var(--faded-black);
+    background: none;
+  }
+
+  .exercise-button:hover, .exercise-button.selected {
+    color: var(--white);
+    background: var(--blue);
+  }
+
+  /* ------------------------------- Exercise Display ----------------------------------*/
+
+  .exercise-display {
+    flex-grow: 1;
+    background: var(--white);
+    padding: 1rem;
+    position: relative;
+  }
+
+  .exercise-tab-button-container {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .exercise-tab-button {
+    flex-grow: 1;
+
+    padding: .4rem 3rem;
+    font-size: 1.5rem;
+    border: none;
+    color: var(--blue);
+    background: var(--light-blue);
+    border-radius: .3rem;
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 1;
+    transition: all 100ms ease-in;
+  }
+
+  .exercise-tab-button.selected {
+    color: var(--white);
+    background: var(--blue);
+  }
+
+  .exercise-tab-button:hover {
+    opacity: .9;
+  }
+
+  .exercise-action-button-container {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    justify-content: flex-end;
+  }
+
+  .exercise-action-button {
+    padding: .1rem .8rem;
+    font-size: 1.1rem;
+    border: none;
+    color: var(--blue);
+    background: var(--white);
+    border-radius: .3rem;
+    border: 1px solid var(--blue);
+    cursor: pointer;
+    opacity: 1;
+    font-weight: bold;
+    transition: all 350ms ease-in;
+  }
+
+  .exercise-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .share-modal-container {
+    position: absolute;
+    bottom: 5rem;
+    right: 3rem;
+  }
+
+  /*------------------------------ Navbar -------------------------*/
+
+  .navbar {
+    background: var(--bg-gray);
+    border-bottom: 1px solid rgb(233, 236, 239);
+    padding: 0 .8rem;
+    padding-top: .4rem;
+    display: flex;
+    gap: .8rem;
+    align-items: flex-start;
+    height: var(--navbar-height);
+    min-height: 4rem;
+  }
+
+  .navbar > img {
+    width: 1.8rem;
+  }
+
+  .navbar > button {
+    padding: .5rem 1rem;
+    border-radius: .2rem;
+    outline: none;
+    border: 1px solid var(--blue);
+    background: none;
+    color: var(--blue);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .navbar-search-container {
+    margin-left: auto;
+    width: 66%;
+  }
+
+  .navbar-search-button {
+    width: 100%;
+    border-radius: .6rem;
+    outline: none;
+    border: none;
+    text-align: left;
+    padding: .6rem;
+    background: var(--bg-dark-gray);
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    gap: 1rem;
+    cursor: text;
+  }
+
+  /*---------------------------------- Searchbox --------------------------*/
+  .searchbox-container {
+    width: 39rem;
+    border-radius: .2rem;
+    padding: 1.4rem;
+  }
+
+  .search-input-container {
+    display: flex;
+    gap: .9rem;
+    align-items: center;
+
+    padding: .4rem 1rem;
+    border: 1px solid var(--blue);
+    border-radius: .2rem;
+  }
+
+  .search-input-container > svg {
+    width: 1rem;
+    color: var(--dark-gray);
+  } 
+
+  .search-input {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: left;
+    color: var(--dark-gray);
+    font-size: 1.3rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: text;
+  }
+
+  .search-input::placeholder {
+    font-size: inherit;
+  }
+
+  .search-results-container {
+    margin-top: .6rem;
+    height: 28rem;
+    overflow: hidden;
+  }
+
+  .search-results-container:hover {
+    overflow-y: auto;
+  }
+
+  .search-results-container::-webkit-scrollbar {
+    width: var(--sb-size) 
+  }
+  
+  .search-results-container::-webkit-scrollbar-thumb {
+    background: var(--sb-thumb-color);
+    border-radius: 10px;
+  }
+
+  .search-entry {
+    width: 100%;
+    padding: .75rem;
+    background: none;
+    outline: none;
+    border: none;
+    text-align: left;
+    transition: all 300ms ease-out;
+    border-radius: .4rem;
+  }
+
+  .search-entry:hover {
+    background: var(--light-blue);
+  }
+
+  .search-entry-exercise {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .search-entry-topic {
+    font-size: .8rem;
+    color: var(--faded-black);
+  }
+
+  /*---------------------------------- Share Modal --------------------------*/
+
+  .share-modal-button {
+    padding: .5rem;
+    border-radius: 50%;
+    outline: none;
+    border: 3px solid var(--blue);
+    background: var(--white);
+    color: var(--blue);
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .share-modal-button > svg {
+    width: 1.8rem;
+  }
+
+  .share-modal-content {
+    padding: 1.5rem 1rem;
+    width: 27rem;
+    align-items: center;
+    position: relative;
+    margin-top: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .share-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .share-modal-body > button {
+    outline: none;
+    background: none;
+    border: none;
+
+    display: flex;
+    gap: .5rem;
+  }
+
+  .share-modal-close-button {
+    outline: none;
+    background: none;
+    border: none;
+    padding: .2rem;
+    border-radius: .2rem;
+    cursor: pointer;
+  }
+
+  .share-modal-close-button:hover {
+    background: var(--bg-dark-gray);
+  }
